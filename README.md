@@ -1,171 +1,121 @@
-# API Inventario v1 con FastAPI, SQLAlchemy y SQLite
+#  API de Inventario v1 (FastAPI + SQLAlchemy + SQLite)
 
-## Descripción
+##  Descripción
 
-Este proyecto consiste en el desarrollo de una API REST para la administración de un inventario básico utilizando **FastAPI**, **SQLAlchemy** y **SQLite**.
+Este proyecto es una API REST diseñada para la gestión de un sistema de inventario básico. Está desarrollada con FastAPI, utilizando SQLAlchemy como ORM y SQLite como base de datos.
 
-La aplicación permite realizar operaciones CRUD (Crear, Consultar, Actualizar y Eliminar) sobre productos, almacenando la información en una base de datos SQLite.
-
-Este proyecto fue desarrollado siguiendo una arquitectura por capas, aplicando buenas prácticas de organización del código y validación de datos mediante Pydantic.
+La aplicación permite realizar operaciones CRUD (crear, leer, actualizar y eliminar productos), aplicando una arquitectura en capas para mejorar la organización del código, la escalabilidad y el mantenimiento.
 
 ---
 
-## Objetivos
+##  Objetivos del proyecto
 
-* Desarrollar una API REST utilizando FastAPI.
-* Implementar una arquitectura por capas.
-* Utilizar SQLAlchemy como ORM.
-* Conectar la aplicación con una base de datos SQLite.
-* Validar los datos mediante Pydantic.
-* Implementar las operaciones CRUD para la gestión de productos.
-
----
-
-## Tecnologías utilizadas
-
-* Python 3.x
-* FastAPI
-* SQLAlchemy
-* SQLite
-* Pydantic
-* Uvicorn
+- Construir una API REST con FastAPI.
+- Aplicar arquitectura en capas (routes, services, repositories, models y schemas).
+- Integrar SQLAlchemy como ORM para la gestión de datos.
+- Utilizar SQLite como base de datos ligera.
+- Implementar validaciones de datos con Pydantic.
+- Desarrollar operaciones CRUD completas para productos.
 
 ---
 
-## Estructura del proyecto
+##  Arquitectura del sistema
 
-```text
-api_inventario/
-│
+- Routes: manejan las peticiones HTTP.
+- Services: contienen la lógica de negocio.
+- Repositories: gestionan el acceso a la base de datos.
+- Models: definen las tablas en SQLAlchemy.
+- Schemas: validan la entrada y salida de datos con Pydantic.
+
+---
+
+##  Tecnologías utilizadas
+
+- Python 3
+- FastAPI
+- SQLAlchemy
+- SQLite
+- Pydantic
+- Uvicorn
+
+---
+
+##  Estructura del proyecto
+
+inventario_api/
 ├── app/
-│   ├── routers/
-│   │   ├── __init__.py
-│   │   └── products.py
-│   │
-│   ├── __init__.py
-│   ├── crud.py
-│   ├── database.py
 │   ├── main.py
-│   ├── models.py
-│   └── schemas.py
-│
-├── inventario.db
+│   ├── database/
+│   │   └── connection.py
+│   ├── models/
+│   │   └── product.py
+│   ├── schemas/
+│   │   └── product.py
+│   ├── repositories/
+│   │   └── product_repository.py
+│   ├── services/
+│   │   └── product_service.py
+│   └── routes/
+│       └── product_routes.py
 ├── requirements.txt
 └── README.md
-```
 
 ---
 
-## Instalación
+##  Instalación
 
-### 1. Clonar el proyecto
-
-```bash
 git clone <URL_DEL_REPOSITORIO>
-```
+cd inventario_api
 
-Entrar al proyecto
+python -m venv venv
+venv\Scripts\activate   (Windows)
+source venv/bin/activate (Linux/Mac)
 
-```bash
-cd api_inventario
-```
-
----
-
-### 2. Crear el entorno virtual
-
-Windows
-
-```bash
-python -m venv .venv
-```
-
-Activar el entorno
-
-```bash
-.venv\Scripts\activate
-```
-
----
-
-### 3. Instalar dependencias
-
-```bash
 pip install -r requirements.txt
-```
-
-Si no existe el archivo requirements.txt:
-
-```bash
-pip install fastapi uvicorn sqlalchemy pydantic
-```
 
 ---
 
-## Ejecutar la aplicación
+##  Ejecución
 
-Desde la carpeta principal ejecutar:
-
-```bash
 uvicorn app.main:app --reload
-```
 
-Si todo está correcto aparecerá un mensaje similar a:
-
-```text
-INFO: Uvicorn running on http://127.0.0.1:8000
-```
-
----
-
-## Documentación de la API
-
-Swagger
-
-```
+API:
+http://127.0.0.1:8000
+Swagger:
 http://127.0.0.1:8000/docs
-```
+Redoc:
+http://127.0.0.1:8000/redoc
 
 ---
 
-## Base de datos
+##  Base de datos
 
-La aplicación utiliza SQLite.
+Se genera automáticamente:
 
-Al ejecutar el proyecto por primera vez se crea automáticamente el archivo:
-
-```text
 inventario.db
-```
-
-Dentro de este archivo se almacena la información de todos los productos.
-
-
----
-# Capturas de Pantalla 
-
-![Swagger](app/media/image.png)
-
-![Swagger](/app/media/image1.png)
-
-![Swagger](/app/media/image2.png)
-
-![Swagger](/app/media/image3.png)
 
 ---
 
+##  Endpoints
 
-## Conclusión
-
-Este proyecto permitió aplicar los conceptos fundamentales del desarrollo de APIs REST utilizando FastAPI y SQLAlchemy. Además, se comprendió el funcionamiento de una arquitectura por capas, el uso de un ORM para interactuar con bases de datos y la importancia de validar la información antes de almacenarla. Gracias a Swagger fue posible probar cada uno de los servicios desarrollados de manera rápida y sencilla.
+POST /products/
+GET /products/
+GET /products/{id}
+PUT /products/{id}
+DELETE /products/{id}
 
 ---
 
-## Autor
+##  Validaciones
 
-**Nombre:** Nicol Neira
+- Nombre mínimo 3 caracteres
+- Precio > 0
+- Stock ≥ 0
+- Categoría mínimo 3 caracteres
 
-**Proyecto:** API Inventario v1
+---
 
-**Tecnologías:** FastAPI · SQLAlchemy · SQLite · Pydantic
+##  Autor
+
+Edith caro 
 
